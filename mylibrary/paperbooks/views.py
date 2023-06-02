@@ -73,7 +73,7 @@ class PasswordChangeView(FormView):
     # будем строить на основе
     # встроенной в django формы смены пароля
     form_class = PasswordChangeForm
-    template_name = 'reg/password_change_form.html'
+    template_name = 'reg/password_change.html'
     # после смены пароля нужно снова входить
     success_url = app_url + 'login/'
 
@@ -94,9 +94,7 @@ def home(request):
     message = None
     if "message" in request.GET:
         message = request.GET["message"]
-    # создание HTML-страницы по шаблону index.html
-    # с заданными параметрами latest_riddles и message
-    return render(
+        return render(
         request,
         "home.html",
         {
