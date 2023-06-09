@@ -29,7 +29,7 @@ class RegisterFormView(FormView):
     # в случае успешной регистрации.
     # В данном случае указана ссылка на
     # страницу входа для зарегистрированных пользователей.
-    success_url = "/login"
+    success_url = "login"
     # Шаблон, который будет использоваться
     # при отображении представления.
     template_name = "reg/register.html"
@@ -50,7 +50,7 @@ class LoginFormView(FormView):
     template_name = "reg/login.html"
     # В случае успеха перенаправим на главную.
     success_url = app_url + 'index/'
-    next_page = 'index'
+    next_page = app_url + 'index/'
 
     def form_valid(self, form):
         # Получаем объект пользователя
@@ -58,10 +58,10 @@ class LoginFormView(FormView):
         self.user = form.get_user()
         # Выполняем аутентификацию пользователя.
         login(self.request, self.user)
+        return super(LoginFormView, self).form_valid(form)
       #  return render(self.request, 'index.html', {'form': form})
         return HttpResponseRedirect('/index/')
         return HttpResponseRedirect(app_url)
-       # return super(LoginFormView, self).form_valid(form)
 
 class LogoutView(View):
     def get(self, request):
