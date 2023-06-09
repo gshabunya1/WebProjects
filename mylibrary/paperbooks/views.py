@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 # Create your views here.
 # Базовый класс для обработки страниц с формами.
@@ -29,11 +29,11 @@ class RegisterFormView(FormView):
     # в случае успешной регистрации.
     # В данном случае указана ссылка на
     # страницу входа для зарегистрированных пользователей.
-    success_url = app_url + "login/"
+    success_url = "/login"
     # Шаблон, который будет использоваться
     # при отображении представления.
     template_name = "reg/register.html"
-
+    
     def form_valid(self, form):
         # Создаём пользователя,
         # если данные в форму были введены корректно.
@@ -49,7 +49,8 @@ class LoginFormView(FormView):
     # только используем шаблон аутентификации.
     template_name = "reg/login.html"
     # В случае успеха перенаправим на главную.
-    success_url = app_url
+    success_url = app_url + 'index/'
+    next_page = 'index'
 
     def form_valid(self, form):
         # Получаем объект пользователя
@@ -57,7 +58,10 @@ class LoginFormView(FormView):
         self.user = form.get_user()
         # Выполняем аутентификацию пользователя.
         login(self.request, self.user)
-        return super(LoginFormView, self).form_valid(form)
+      #  return render(self.request, 'index.html', {'form': form})
+        return HttpResponseRedirect('/index/')
+        return HttpResponseRedirect(app_url)
+       # return super(LoginFormView, self).form_valid(form)
 
 class LogoutView(View):
     def get(self, request):
@@ -75,7 +79,7 @@ class PasswordChangeView(FormView):
     form_class = PasswordChangeForm
     template_name = 'reg/password_change.html'
     # после смены пароля нужно снова входить
-    success_url = app_url + 'login/'
+    success_url = 'login/'
 
     def get_form_kwargs(self):
         kwargs = super(PasswordChangeView, self).get_form_kwargs()
@@ -91,16 +95,7 @@ class PasswordChangeView(FormView):
 # Create your views here.
 # главная страница 
 def home(request):
-    message = None
-    if "message" in request.GET:
-        message = request.GET["message"]
-        return render(
-        request,
-        "home.html",
-        {
-            "message": message
-        }
-    )
+     return render(request, "home.html")
 
 def index(request):
     message = None
@@ -110,7 +105,7 @@ def index(request):
     # с заданными параметрами latest_riddles и message
     return render(
         request,
-        "home.html",
+        "index.html",
         {
             "message": message
         }
