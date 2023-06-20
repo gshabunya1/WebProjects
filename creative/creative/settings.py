@@ -15,7 +15,14 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+import os
 
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'creative.settings')
+from django.conf import settings
+
+if not settings.configured:
+    settings.configure()
+ 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -38,6 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'party',
+    'crispy_forms',
+    'crispy_bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +60,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'creative.urls'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 
 TEMPLATES = [
     {
@@ -70,6 +82,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'creative.wsgi.application'
 
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = "home"
+LOGOUT_REDIRECT_URL = 'login'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -104,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 

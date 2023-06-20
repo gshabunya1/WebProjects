@@ -15,7 +15,14 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+import os
 
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mylibrary.settings')
+from django.conf import settings
+
+if not settings.configured:
+    settings.configure()
+    
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -77,7 +84,7 @@ WSGI_APPLICATION = 'mylibrary.wsgi.application'
 
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
-LOGIN_REDIRECT_URL = "index"
+LOGIN_REDIRECT_URL = "warehous"
 LOGOUT_REDIRECT_URL = 'home'
 
 # Database
@@ -115,7 +122,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru-ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Minsk'
 
 USE_I18N = True
 

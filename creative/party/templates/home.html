@@ -1,0 +1,13 @@
+{% extends 'base.html'%}
+
+{% block main %}
+    {% if user.is_autenticated %}
+        <div clacc="row" >
+            <img  width="100" height="100" src="/static/oboi-5.jpg" class="img-fluid col-sm-7 rounded sm-auto d-block" alt="Картинка oboi-5">
+        </div>
+    {% else %}
+        <div clacc="row" >
+            <img  width="100" height="100" src="/static/images.jpg" class="img-fluid col-sm-7 rounded sm-auto d-block" alt="Картинка images.jpg">
+        </div>
+    {%endif%}
+{% endblock %}

@@ -1,6 +1,18 @@
+import django
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
+from django import setup
+
+
+import os
+
+from django.conf import settings
+
+if not settings.configured:
+    settings.configure()
+    
+django.setup()
 # Create your views here.
 # Базовый класс для обработки страниц с формами.
 from django.views.generic.edit import FormView
@@ -19,7 +31,7 @@ from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.views.generic.base import View
 from django.contrib.auth import logout
 
-app_url = "/paperbooks/"
+app_url = "paperbooks/"
 
 class RegisterFormView(FormView):
     # будем строить на основе
@@ -49,7 +61,7 @@ class LoginFormView(FormView):
     # только используем шаблон аутентификации.
     template_name = "reg/login.html"
     # В случае успеха перенаправим на главную.
-    success_url = app_url + 'index/'
+    success_url = app_url + 'index'
     next_page = app_url + 'index/'
 
     def form_valid(self, form):
