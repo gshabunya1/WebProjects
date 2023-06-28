@@ -1,11 +1,77 @@
 {% extends 'base.html'%}
 
 {% block page_header %}
-<h1>Выбор Мероприятия</h1>
+<h1>Сотвори праздник!</h1>
 {% endblock %}
 
 {% block main %}
-    <div clacc="row" >
-        <img  width="100" height="100" src="/static/lib-2.jpg" class="img-fluid col-sm-7 rounded sm-auto d-block" alt="Картинка библиотеки">
+    <style>
+        .btn-block {
+            text-align: center;
+            vertical-align: middle;
+            display: inline-block;
+            border-radius: 10px;
+            color: black;
+            transition: .2s linear;
+            background: #C1F1E4;
+        }
+
+        .btn-block:hover {
+            box-sadow: -400px 0 0 0 rgba(0,0,0,.3) insert;
+        }
+    </style>
+    {% if message %}
+        <p class="alert alert-success">
+            <strong>{{ message }}</strong>
+        </p>
+    {% endif %}
+    <div class="container">
+        <form name="def_action" method="GET">
+            {% csrf_token %}
+            {% if user.is_autenticated %}
+                <div class="form-row row-cols-7">
+                    <div class="fom-input col-xl-4">
+                        <button class="btn-block align-middle" type="submit" name="create-event" 
+                                title="Создать мероприятие" 
+                                formaction="new_event/">
+                            <img src="/static/You're welcome.gif" class="float-left"
+                                style="height: 50px">Новое событие
+                        </button>
+                    </div>
+                    <div class="fom-input col-xl-4">
+                        <button class="btn-block align-middle" type="submit" name="list-events" 
+                            title="Текущие мероприятия" 
+                            formaction="list_events/">
+                            <img src="/static/shoveler.gif" class="float-left"
+                                style="height: 50px">Текущие мероприятия
+                        </button>
+                    </div>
+                </div>
+            {% else %}
+                <div class="form-row row-cols-7">
+                    <div class="fom-input col-xl-4">
+                        <button class="btn-block align-middle" type="submit" name="portfolio" 
+                            title="Наши праздники" 
+                            formaction="portfolio/">
+                            <img src="/static/big_party7_dance.gif" class="float-left"
+                                style="height: 50px">Наши праздники
+                        </button>
+                    </div>
+                    <div class="fom-input col-xl-4">
+                        <button class="btn-block align-middle" type="submit" name="staff" 
+                            title="Наши сотрудники" 
+                            formaction="staff/">
+                            <img src="/static/Идея.gif" class="float-left"
+                                style="height: 50px">Наши сотрудники
+                        </button>
+                    </div>
+                </div>
+            {% endif %}
+        </form>
+    </div>
+    <div class="container-fluid">
+        <div class="row" >
+            <img  width="100" height="100" src="/static/lib-2.jpg" class="img-fluid col-sm-7 rounded sm-auto d-block" alt="Картинка">
+        </div>
     </div>
 {% endblock %}

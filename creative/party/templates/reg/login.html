@@ -2,11 +2,11 @@
 {% load crispy_forms_tags %}
 {% block main %}
 <h4 class="card-title">Log in to your account</h4>
-<form  action="index/" method="POST">
+<form  method="POST">
     {% csrf_token %}
-    <input type="hidden" name="next_page" value="{{ next_page }}">
+    <input type="hidden" name="next" value="{{ next }}">
     {% crispy form %}
-    <button type="submit" class="btn btn-success btn-block" onclick='index/'">
+    <button type="submit" class="btn btn-success btn-block">
         Log in
     </button>
     <a href=".." class="btn btn-danger btn-block">

@@ -62,7 +62,7 @@ class LoginFormView(FormView):
     template_name = "reg/login.html"
     # В случае успеха перенаправим на главную.
     success_url = app_url
-    next_page = app_url
+    next = app_url
 
     def form_valid(self, form):
         # Получаем объект пользователя
@@ -118,6 +118,62 @@ def index(request):
     return render(
         request,
         "index.html",
+        {
+            "message": message
+        }
+    )
+
+def new_event(request):
+    message = None
+    if "message" in request.GET:
+        message = request.GET["message"]
+    # создание HTML-страницы по шаблону index.html
+    # с заданными параметрами latest_riddles и message
+    return render(
+        request,
+        "new_event.html",
+        {
+            "message": message
+        }
+    )
+
+def list_events(request):
+    message = None
+    if "message" in request.GET:
+        message = request.GET["message"]
+    # создание HTML-страницы по шаблону index.html
+    # с заданными параметрами latest_riddles и message
+    return render(
+        request,
+        "list_events.html",
+        {
+            "message": message
+        }
+    )
+    
+def portfolio(request):
+    message = None
+    if "message" in request.GET:
+        message = request.GET["message"]
+    # создание HTML-страницы по шаблону index.html
+    # с заданными параметрами latest_riddles и message
+    return render(
+        request,
+        "portfolio.html",
+        {
+            "message": message
+        }
+    )
+    
+def staff(request):
+    message = None
+    if "message" in request.GET:
+        message = request.GET["message"]
+    # создание HTML-страницы по шаблону index.html
+    # с заданными параметрами latest_riddles и message
+    return render(
+        request,
+        "staff.html",
         {
             "message": message
         }
