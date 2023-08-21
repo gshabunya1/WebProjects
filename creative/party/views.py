@@ -124,60 +124,16 @@ def index(request):
     )
 
 def new_event(request):
-    message = None
-    if "message" in request.GET:
-        message = request.GET["message"]
-    # создание HTML-страницы по шаблону index.html
-    # с заданными параметрами latest_riddles и message
-    return render(
-        request,
-        "new_event.html",
-        {
-            "message": message
-        }
-    )
+    return HttpResponse("Создать новое событие")
 
 def list_events(request):
-    message = None
-    if "message" in request.GET:
-        message = request.GET["message"]
-    # создание HTML-страницы по шаблону index.html
-    # с заданными параметрами latest_riddles и message
-    return render(
-        request,
-        "list_events.html",
-        {
-            "message": message
-        }
-    )
-    
+    return HttpResponse("Вывести список событий")    
+
 def portfolio(request):
-    message = None
-    if "message" in request.GET:
-        message = request.GET["message"]
-    # создание HTML-страницы по шаблону index.html
-    # с заданными параметрами latest_riddles и message
-    return render(
-        request,
-        "portfolio.html",
-        {
-            "message": message
-        }
-    )
+    return HttpResponse("Вывести фотографии событий")    
     
 def staff(request):
-    message = None
-    if "message" in request.GET:
-        message = request.GET["message"]
-    # создание HTML-страницы по шаблону index.html
-    # с заданными параметрами latest_riddles и message
-    return render(
-        request,
-        "staff.html",
-        {
-            "message": message
-        }
-    )
+    return HttpResponse("Вывести список сотрудников")    
 
 
 
